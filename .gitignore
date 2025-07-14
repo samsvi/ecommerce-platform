@@ -1,0 +1,78 @@
+# -----------------------------
+# OS / Editor / IDE files
+# -----------------------------
+.DS_Store
+Thumbs.db
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# VSCode
+.vscode/
+
+# Eclipse / STS
+.project
+.classpath
+.settings/
+.springBeans
+.factorypath
+.apt_generated
+
+# NetBeans
+nbproject/private/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# -----------------------------
+# Maven / Build artifacts
+# -----------------------------
+target/
+*.log
+*.class
+*.jar
+*.war
+*.ear
+dependency-reduced-pom.xml
+
+# Maven wrapper
+.mvn/
+mvnw
+mvnw.cmd
+
+# -----------------------------
+# Node / Frontend (React etc.)
+# -----------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log
+dist/
+build/
+
+# -----------------------------
+# Docker
+# -----------------------------
+**/docker-compose.override.yml
+**/.env
+.env.*
+.dockerignore
+
+# -----------------------------
+# Logs
+# -----------------------------
+logs/
+*.out
+
+# -----------------------------
+# Misc
+# -----------------------------
+*.swp
+*.swo
+*.tmp
+*.bak
