@@ -1,0 +1,19 @@
+### Register
+POST http://localhost:8080/api/v1/auth/register
+Content-Type: application/json
+
+{
+  "firstName": "a",
+  "lastName": "a",
+  "email": "a",
+  "password": "12345678"
+}
+
+### Login
+POST http://localhost:8080/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "a",
+  "password": "12345678"
+}

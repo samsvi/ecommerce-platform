@@ -9,6 +9,7 @@ import com.ecommerce.userservice.domain.model.enums.Role;
 import com.ecommerce.userservice.domain.port.inbound.AuthenticationService;
 import com.ecommerce.userservice.domain.port.outbound.JwtTokenProvider;
 import com.ecommerce.userservice.domain.port.outbound.UserRepository;
+import com.ecommerce.userservice.infrastructure.messaging.producer.UserEventProducer;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,12 +27,14 @@ public class AuthenticationServiceAdapter implements AuthenticationService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
+    private final UserEventProducer userEventPublisher;
 
-    public AuthenticationServiceAdapter(JwtTokenProvider jwtTokenProvider, UserRepository userRepository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager) {
+    public AuthenticationServiceAdapter(JwtTokenProvider jwtTokenProvider, UserRepository userRepository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, UserEventProducer userEventPublisher) {
         this.jwtTokenProvider = jwtTokenProvider;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
+        this.userEventPublisher = userEventPublisher;
     }
 
     @Override
@@ -50,7 +53,7 @@ public class AuthenticationServiceAdapter implements AuthenticationService {
         }
 
         userRepository.save(user);
-
+        userEventPublisher.publishUserRegistered(user);
         String token = jwtTokenProvider.generateToken(user);
 
         return null;
